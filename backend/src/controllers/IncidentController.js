@@ -40,15 +40,18 @@ module.exports = {
     async delete(request, response) {
         const { id } = request.params;
         const ong_id = request.headers.authorization;
-
-        const incident = await connection('incidents').where('id', id).select('ong_id').first();
-        
-        if (incident.ong_id != ong_id) {
-            return response.status(401).json({ error: 'Operation not allowed.' });
+  
+        const incident = await connection('incidents')
+           .where('id', id)
+           .select('ong_id')
+           .first();
+  
+        if (incident.ong_id !== ong_id) {
+           return response.status(401).json({ Error: "You're not authorized" });
         }
-
-        connection('incidents').where('id', id).delete();
-        
+  
+        await connection('incidents').where('id', id).delete()
+  
         return response.status(204).send();
     }
 }
