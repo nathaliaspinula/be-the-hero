@@ -7,7 +7,7 @@ import logoImg from '../../assets/logo.svg';
 
 import './styles.css';
 
-export default function() {
+export default function () {
     const [id, setId] = useState('');
     const history = useHistory();
 
